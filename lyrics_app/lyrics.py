@@ -1,8 +1,13 @@
 import json
 import pandas as pd
 import collections
-import lyricsgenius
-import streamlit as st
+import sys
+
+try:
+    import lyricsgenius
+except:
+    import subprocess
+    subprocess.run(['pip3','install','lyricsgenius'])
 
 client_access_token = "HpIYpWE8urYEimLXmjRsNBXLUERWVVS85HHCQEWrSKBedFN0b7OxCweWpLbk7CT-"
 LyricsGenius = lyricsgenius.Genius(client_access_token)
@@ -34,30 +39,5 @@ def getSongs(artist, album_name=None, max_songs=None):
     lyrics_df = pd.DataFrame.from_dict(dict(lyrics_dict), orient='index').reset_index().rename(columns={'index':'song_title',0:'lyrics'})
     return lyrics_df
 
-artist_name = st.text_input('Artist name')
-album_name  = st.text_input('Album name')
-
-lyrics_df = getSongs(artist_name, album_name)
-artist_clean = artist_name.replace(' ','')
-album_clean  = album_name.replace(' ','')
-    
-@st.cache
-def convert_df(df):
-    return df.to_csv()
-
-csv = convert_df(lyrics_df)
-
-if album_name == '':
-  st.download_button(
-      label="Download data as CSV",
-      data=csv,
-      file_name=f'lyrics_{artist_clean}.csv',
-      mime='text/csv',
-  )
-else:
-  st.download_button(
-      label="Download data as CSV",
-      data=csv,
-      file_name=f'lyrics_{artist_clean}-{album_clean}.csv',
-      mime='text/csv',
-  )
+lyrics_df = getSongs(sys.argv[1], sys.argv[2])
+lyrics_df.to_csv(f'{sys.argv[1]}-{sys.argv[2]}_lyrics')
