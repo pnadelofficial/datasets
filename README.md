@@ -1,4 +1,4 @@
-# datasets
+# Example Datasets for CLS 161 
 This repo contains several datasets that I have compiled for CLS161 in the Fall of 2022. They are in varying states of difficulty, based on their relative cleanness. Please see the license below as well as the LICENSE file in the repo itself if you have any questions about usage. 
 
 ## Contents
