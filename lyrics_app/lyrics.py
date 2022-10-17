@@ -8,6 +8,7 @@ try:
 except:
     import subprocess
     subprocess.run(['pip3','install','lyricsgenius'])
+    import lyricsgenius
 
 client_access_token = "HpIYpWE8urYEimLXmjRsNBXLUERWVVS85HHCQEWrSKBedFN0b7OxCweWpLbk7CT-"
 LyricsGenius = lyricsgenius.Genius(client_access_token)
