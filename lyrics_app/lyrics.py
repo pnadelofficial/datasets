@@ -11,7 +11,7 @@ except:
     import lyricsgenius
 
 client_access_token = "HpIYpWE8urYEimLXmjRsNBXLUERWVVS85HHCQEWrSKBedFN0b7OxCweWpLbk7CT-"
-LyricsGenius = lyricsgenius.Genius(client_access_token)
+LyricsGenius = lyricsgenius.Genius(client_access_token,timeout=40)
 LyricsGenius.excluded_terms = ["Live", "(Live)", "MTV Unplugged", "Demo"]
 
 def getSongs(artist, album_name=None, max_songs=None):
@@ -41,4 +41,4 @@ def getSongs(artist, album_name=None, max_songs=None):
     return lyrics_df
 
 lyrics_df = getSongs(sys.argv[1], sys.argv[2])
-lyrics_df.to_csv(f'{sys.argv[1]}-{sys.argv[2]}_lyrics')
+lyrics_df.to_csv(f'{sys.argv[1]}-{sys.argv[2]}_lyrics.csv')
