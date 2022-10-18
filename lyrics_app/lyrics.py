@@ -41,4 +41,4 @@ def getSongs(artist, album_name=None, max_songs=None):
     return lyrics_df
 
 lyrics_df = getSongs(sys.argv[1], sys.argv[2])
-lyrics_df.to_csv(f'{sys.argv[1]}-{sys.argv[2]}_lyrics.csv')
+lyrics_df.to_csv(f'{sys.argv[1]}-{sys.argv[2]}_lyrics.csv',index=False)
