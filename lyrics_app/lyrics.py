@@ -27,7 +27,7 @@ def getSongs(artist, album_name=None, max_songs=None):
         for song in data['songs']:
             lyrics_dict[song['title']] += song['lyrics']
     else:
-        clean_album = album_name.replace(' ', '')
+        clean_album = album_name.replace(' ', '').replace("'","").replace('!','')
         album_obj = LyricsGenius.search_album(album_name, artist)
         album_obj.save_lyrics(filename=f'Lyrics_{clean_album}', overwrite=True)
         print('Data saved')
