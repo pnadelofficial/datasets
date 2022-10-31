@@ -18,6 +18,7 @@ def getSongs(artist, album_name=None, max_songs=None):
     clean_name = artist.replace(' ', '')
     lyrics_dict = collections.defaultdict(str)
     if album_name is None:
+        clean_album= ''
         artist_obj = LyricsGenius.search_artist(artist, max_songs=max_songs)
         artist_obj.save_lyrics(filename=f'Lyrics_{clean_name}', overwrite=True)
         print('Data saved')
@@ -38,4 +39,5 @@ def getSongs(artist, album_name=None, max_songs=None):
             lyrics_dict[song['song']['full_title'].split('by')[0].strip()] += song['song']['lyrics']
  
     lyrics_df = pd.DataFrame.from_dict(dict(lyrics_dict), orient='index').reset_index().rename(columns={'index':'song_title',0:'lyrics'})
+    lyrics_df.to_csv(f'{clean_name}-{clean_album}_lyrics.csv')
     return lyrics_df
